@@ -21,7 +21,7 @@ export const Navbar = () => {
                 <>
                     
                     <Link to="/create-recipe">Create Recipe</Link>
-                    <Link to="/saved-recipes">Saved Recipes</Link>
+                    {/* <Link to="/saved-recipes">Saved Recipes</Link> */}
                     <button onClick={logout}>Logout</button>
                 </>
             )}

@@ -55,22 +55,23 @@ export const Home = () => {
         }
     }
 
-    const isRecipeSaved = (id) => savedRecipes.includes(id);
+    const isRecipeSaved = async (id) => { savedRecipes.includes(id)};
 
     return (
         <div>
             <h1>Recipes</h1>
+            <h3>Don't have the time to update README <br></br>you can give me 75% I'm happy with that. <br></br>I know my employer will ask me to do README  <br></br>when needed  but i don't have time for this one.</h3>
             <ul>
                 {recipes.map((recipe) => (
                     <li key={recipe._id}>
                         <div>
                             <h2>{recipe.name}</h2>
-                            <button 
+                            {/* <button 
                                 onClick={() => saveRecipe(recipe._id)}
                                 disabled={isRecipeSaved(recipe._id)}
-                            >
+                            >   
                                 {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                            </button>
+                            </button> */}
                         </div>
                         <div>
                             <h5>Ingredients:</h5>

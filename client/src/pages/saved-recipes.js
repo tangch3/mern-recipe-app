@@ -16,6 +16,7 @@ export const SavedRecipes = () => {
           `http://localhost:8080/recipes/savedRecipes/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
+        console.log(setSavedRecipes)
 
       } catch (err) {
         console.log(err);
