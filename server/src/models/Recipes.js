@@ -28,4 +28,4 @@ const RecipeScheme = new mongoose.Schema({
     }
 });
 
-export const RecipeModel = mongoose.model("recipes", RecipeScheme) // Users is what the collection will be called in MongoDB
+export const RecipeModel = mongoose.model("recipes", RecipeScheme) // Recipes is what the collection will be called in MongoDB

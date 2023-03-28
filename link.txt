@@ -1,0 +1,5 @@
+github: 
+https://github.com/tangch3/mern-recipe-app.git
+
+deployed on vercel:
+https://mern-recipe-app-a1ej.vercel.app
