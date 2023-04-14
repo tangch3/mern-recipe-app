@@ -9,6 +9,7 @@ const router = express.Router()
 router.post("/register", async (req, res) => {
     const { username, password } = req.body;
     const user = await UserModel.findOne({username: username});
+    console.log(user)
 
     if (user) { // if user already exists
         return res.json({ message: "User already exists." });
@@ -30,22 +31,27 @@ router.post("/register", async (req, res) => {
 /* *********** LOGIN AUTHENTICATION *********** */
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const user = await UserModel.findOne({username: username});
-
+  
+    const user = await UserModel.findOne({ username });
+  
     if (!user) {
-        return res.json({ message: "User doesn't exist" });
+      return res
+        .status(400)
+        .json({ message: "Username or password is incorrect" });
     }
 
     // once you hash something you cannot unhash it, so we will hash the password and if it is the same then the password is correct - the algo for hashing will always return the same value. So we compare the password with the hashed password
-    const isPasswordValid = await bcrypt.compare(password, user.password)
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-        return res.json({ message: "Username or password is incorrect."})
+      return res
+        .status(400)
+        .json({ message: "Username or password is incorrect" });
     }
-
+    
     // creating a token using jsonwebtoken. When you sign, you sign the ID of the user.
-    const token = jwt.sign({id: user._id}, "secret");
-    res.json({ token, userID: user._id })
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, "secret");
+    res.json({ token, userID: user._id, isAdmin: user.isAdmin });
 
     /* to check if this is working open postman and send a post request to http://localhost:3001/auth/login and add: 
         {
@@ -61,12 +67,12 @@ router.post("/login", async (req, res) => {
         }
 
     */
-});
+  });
 
 export { router as userRouter };
 
 export const verifyToken = (req, res, next) => {
-    const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization;
     if (authHeader) {
       jwt.verify(authHeader, "secret", (err) => {
         if (err) {
@@ -77,4 +83,29 @@ export const verifyToken = (req, res, next) => {
     } else {
       res.sendStatus(401);
     }
-  };
+};
+
+export const isAdmin = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    jwt.verify(authHeader, "secret", (err, decodedToken) => {
+      if (err) {
+        return res.sendStatus(403);
+      }
+
+      const userId = decodedToken.id;
+
+      UserModel.findById(userId, (err, user) => {
+        if (err || !user) {
+          return res.sendStatus(403);
+        }
+        if (!user.isAdmin) {
+          return res.sendStatus(403);
+        }
+        next();
+      });
+    });
+  } else {
+    res.sendStatus(401);
+  }
+}

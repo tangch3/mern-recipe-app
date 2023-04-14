@@ -55,23 +55,30 @@ export const Home = () => {
         }
     }
 
-    const isRecipeSaved = async (id) => { savedRecipes.includes(id)};
+    const isRecipeSaved = (id) => savedRecipes.includes(id);
 
     return (
         <div>
-            <h1>Recipes</h1>
-            <h3>Don't have the time to update README <br></br>you can give me 75% I'm happy with that. <br></br>I know my employer will ask me to do README  <br></br>when needed  but i don't have time for this one.</h3>
+            <h1>Recipes Home Feed</h1>
+            {!cookies.access_token && <p>Please log in to save or create recipes.</p>}
             <ul>
                 {recipes.map((recipe) => (
                     <li key={recipe._id}>
-                        <div>
-                            <h2>{recipe.name}</h2>
-                            {/* <button 
-                                onClick={() => saveRecipe(recipe._id)}
-                                disabled={isRecipeSaved(recipe._id)}
-                            >   
-                                {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
-                            </button> */}
+                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <h2 >{recipe.name}</h2>
+                            {cookies.access_token && (
+                                <button
+                                    onClick={() => saveRecipe(recipe._id)}
+                                    disabled={isRecipeSaved(recipe._id)}
+                                    style={
+                                        isRecipeSaved(recipe._id)
+                                            ? { opacity: 0.2, backgroundColor: "lightgreen" }
+                                            : {}
+                                    }
+                                >
+                                    {isRecipeSaved(recipe._id) ? "Saved" : "Save"}
+                                </button>
+                            )}
                         </div>
                         <div>
                             <h5>Ingredients:</h5>
@@ -82,10 +89,16 @@ export const Home = () => {
                             </h6>
                         </div>
                         <div className='instructions'>
+                            <h5>Instructions:</h5>
                             <p>{recipe.instructions}</p>
                         </div>
-                        <img src={recipe.imageUrl} alt={recipe.name} />
-                        <p>Cooking Time: {recipe.cookingTime} (minutes)</p>
+                        <div>
+                            <img src={recipe.imageUrl} alt={recipe.name} />
+                        </div>
+                        <div>
+                            <h5>Cooking Time:</h5>
+                            <p>{recipe.cookingTime} (minutes)</p>
+                        </div>
                     </li>
                 ))}
             </ul>

@@ -36,6 +36,7 @@ const Login = () => {
 
         } catch (err) {
             console.error(err);
+            alert("Username or Password Incorrect")
         }
     }
 

@@ -27,14 +27,27 @@ export const SavedRecipes = () => {
 
   }, []);
 
+  const deleteRecipeFromSaved = async (recipeID) => {
+    try {
+      await axios.delete(`http://localhost:8080/recipes/delete/${userID}/savedRecipes/${recipeID}`)
+      window.location.reload()
+
+    } catch (err) {
+      console.log(err)
+    }
+
+  }
+
   return (
     <div>
       <h1>Saved Recipes</h1>
+      <h2>These are all the recipes you have saved from your feed. Get cooking!</h2>
       <ul>
         {savedRecipes.map((recipe) => (
           <li key={recipe._id}>
-            <div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <h2>{recipe.name}</h2>
+              <button onClick= {() => deleteRecipeFromSaved(recipe._id)}>Remove</button>
             </div>
             <div>
                 <h5>Ingredients:</h5>
@@ -44,9 +57,17 @@ export const SavedRecipes = () => {
                     ))}
                 </h6>
             </div>
-            <p>{recipe.instructions}</p>
-            <img src={recipe.imageUrl} alt={recipe.name} />
-            <p>Cooking Time: {recipe.cookingTime} minutes</p>
+            <div className='instructions'>
+                <h5>Instructions:</h5>
+                <p>{recipe.instructions}</p>
+            </div>
+            <div>
+                <img src={recipe.imageUrl} alt={recipe.name} />
+            </div>
+            <div>
+                <h5>Cooking Time:</h5>
+                <p>{recipe.cookingTime} (minutes)</p>
+            </div>
           </li>
         ))}
       </ul>

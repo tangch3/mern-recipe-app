@@ -14,7 +14,11 @@ const UserSchema = new mongoose.Schema({
     savedRecipes: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "recipes",
-    }]
+    }],
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 export const UserModel = mongoose.model("users", UserSchema) // Users is what the collection will be called in MongoDB
