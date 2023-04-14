@@ -8,8 +8,6 @@ import { Navbar } from './components/Navbar'
 import { MyRecipes } from './pages/my-recipes';
 import { Admin } from './pages/admin';
 
-
-
 function App() {
   return (
     <div className="App">

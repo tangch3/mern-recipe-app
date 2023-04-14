@@ -4,12 +4,15 @@ import { isAdmin } from './users.js';
 
 const router = express.Router();
 
-router.get("/admin", isAdmin, async (req, res) => {
+router.delete("/delete/:recipeID", async (req, res) => {
+
+    const recipeID = req.params.recipeID;
+
     try {
-        const response = await RecipeModel.find({}) // {} returns all values in the collection
-        res.json(response);
+        await RecipeModel.findByIdAndDelete(recipeID);
+
     } catch (err) {
-        res.json(err);
+        res.json(err)
     }
 })
 

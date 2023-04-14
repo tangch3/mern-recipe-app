@@ -43,7 +43,7 @@ export const SavedRecipes = () => {
       <h1>Saved Recipes</h1>
       <h2>These are all the recipes you have saved from your feed. Get cooking!</h2>
       <ul>
-        {savedRecipes.map((recipe) => (
+        {savedRecipes && savedRecipes.map((recipe) => (
           <li key={recipe._id}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <h2>{recipe.name}</h2>

@@ -28,6 +28,7 @@ export const Navbar = () => {
               {decodedToken.isAdmin && <Link to="/admin">Admin</Link>}
               {!decodedToken.isAdmin && (
                 <>
+                
                   <Link to="/saved-recipes">Saved Recipes</Link>
                   <Link to="/my-recipes">My Recipes</Link>
                   <Link to="/create-recipe">Create Recipe</Link>

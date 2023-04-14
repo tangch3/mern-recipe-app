@@ -21,3 +21,4 @@ mongoose.connect("mongodb+srv://tangch3:tangch3@cluster0.b68any3.mongodb.net/rec
 
 app.listen(port, () => console.log(`SERVER STARTED ON PORT ${port}`))
 
+export default app;
