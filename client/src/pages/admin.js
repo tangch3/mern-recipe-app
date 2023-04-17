@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useGetUserID } from '../hooks/useGetUserID';
+import { useGetUserID } from '../hooks/useGetUserID.js';
 
 export const Admin = () => {
     const [recipes, setRecipes] = useState([]);

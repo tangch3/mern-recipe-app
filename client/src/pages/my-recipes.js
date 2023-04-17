@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useGetUserID } from '../hooks/useGetUserID';
+import { useGetUserID } from '../hooks/useGetUserID.js';
 
 
 export const MyRecipes = () => {

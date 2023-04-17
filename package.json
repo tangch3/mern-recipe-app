@@ -6,7 +6,8 @@
   "scripts": {
     "server": "cd server && npm install && npm start",
     "client": "cd client && npm install && npm start",
-    "start": "npm install concurrently && concurrently \"npm run client\" \"npm run server\""
+    "start": "npm install concurrently && concurrently \"npm run client\" \"npm run server\"",
+    "test": "cd server && npx mocha"
   },
   "keywords": [],
   "author": "",
