@@ -41,7 +41,12 @@ password: admin
 
 - Mocha, Chai are used to test the backend of this project.
 
-To run the backend test, navigate to the servers directory in the command line and type:
+Ensure that the server is not running.
+```
+killall node
+```
+
+To run the backend test, type:
 
 ```
 npm test
@@ -49,10 +54,18 @@ npm test
 
 ## Frontend testing
 
-- Axios was used to test the frontend of this project
-- The frontend test involves a snapshot test to determine if the application renders without crashing. We also perform an recipe test to determine if the first recipe name is fetched.
+- The frontend test involves a snapshot test to determine if the application renders without crashing.
 
-To run the frontend test, navigate to the frontend directory in the command line and type:
+Ensure that the server IS running.
+```
+npm start
+```
+To run the frontend test, navigate to the frontend directory in the command line 
+
+```
+cd client
+```
+and type:
 
 ```
 npm test
