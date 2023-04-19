@@ -5,7 +5,8 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "test": "cd test && npx mocha"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
